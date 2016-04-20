@@ -1,12 +1,13 @@
+#!/usr/bin/zsh
 # Basic zsh and oh-my-zsh config
 
 export ZSH=${HOME}/.oh-my-zsh
 
-ZSH_THEME="agnoster"
-HYPHEN_INSENSITIVE="true"
-DISABLE_AUTO_UPDATE="true"
+export ZSH_THEME="agnoster"
+export HYPHEN_INSENSITIVE="true"
+export DISABLE_AUTO_UPDATE="true"
 
-plugins=(git meteor sudo z)
+export plugins=(git meteor sudo z)
 
 export LC_ALL=en_GB.UTF-8
 
@@ -26,6 +27,7 @@ alias -g pacman='yaourt'
 alias -g fname='find -name'
 alias -g cpan='sudo cpan'
 alias -g less='less --tabs=1,5'
+alias -g gits='git status'
 
 alias -g π='yaourt'
 alias -g π↑↑='π -Syua'
@@ -35,6 +37,23 @@ alias -g π↓='π -Rsn'
 
 alias -g ¬='sudo'
 
+alias -g ð='git'
+alias -g ðs='ð status'
+alias -g ðd='ð diff'
+alias -g ðdd='ð diff2'
+alias -g ðdn='ð diffnames'
+alias -g ða='ð add'
+alias -g ðaa='ð add .'
+alias -g ðc='ð commit'
+alias -g ðcc='ðc -m'
+alias -g ð↑='ð push'
+alias -g ð↓='ð pull'
+alias -g ðx='ð checkout'
+alias -g ðxx='ðx master'
+alias -g ðr='ð reset'
+alias -g ðrr='ð reset --hard'
+alias -g ðm='ð merge'
+alias -g ðmm='ðm master'
 alias -g ↑='2>&1'
 alias -g ↓='2>/dev/null'
 alias -g ↓↓='1>/dev/null 2>&1'
