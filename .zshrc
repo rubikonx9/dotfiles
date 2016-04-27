@@ -46,6 +46,7 @@ alias -g ða='ð add'
 alias -g ðaa='ð add .'
 alias -g ðc='ð commit'
 alias -g ðcc='ðc -m'
+alias -g ðb='ð branch'
 alias -g ð↑='ð push'
 alias -g ð↓='ð pull'
 alias -g ðx='ð checkout'
@@ -101,3 +102,8 @@ zstyle ':completion:*' menu select=2
 # Sets LS_COLORS
 eval $(dircolors -b)
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Move-by-word witl ctrl + [← / →]
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
