@@ -7,7 +7,7 @@ export ZSH_THEME="agnoster"
 export HYPHEN_INSENSITIVE="true"
 export DISABLE_AUTO_UPDATE="true"
 
-export plugins=(git meteor sudo z)
+export plugins=(git sudo)
 
 export LC_ALL=en_GB.UTF-8
 
@@ -38,6 +38,7 @@ alias -g ¬='sudo'
 
 alias -g ð='git'
 alias -g ðs='ð status'
+alias -g ðss='ðs -s'
 alias -g ðdd='ð diff'
 alias -g ðd='ð diff2'
 alias -g ðdn='ð diffnames'
@@ -46,8 +47,10 @@ alias -g ða='ð add'
 alias -g ðaa='ð add .'
 alias -g ðc='ð commit'
 alias -g ðcc='ðc -m'
+alias -g ðl='ð lg'
 alias -g ðb='ð branch'
 alias -g ð↑='ð push'
+alias -g ð↑↑='ð↑ -u origin $(git branch | grep -e "^*" | cut -d" " -f 2)'
 alias -g ð↓='ð pull'
 alias -g ðx='ð checkout'
 alias -g ðxx='ðx master'
@@ -67,7 +70,7 @@ alias -g ≈≈='grep ® ↓ -e'
 alias -g ©='| perl -pe "s/\e\[?.*?[\@-~]//g"'
 alias -g þ='| xargs'
 alias -g þ1='| xargs -n1'
-alias -g §='þ subl'
+alias -g §='© þ subl'
 alias -g →='| cat'
 alias -g µ='| sort -u'
 alias -g :1='| cut -d":" -f1'
