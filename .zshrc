@@ -18,7 +18,6 @@ source ${ZSH}/oh-my-zsh.sh
 alias -g ls='ls --color=always'
 alias -g ll='ls -lah'
 alias -g l1='ls -1'
-alias -g l='l1'
 alias -g df='df -h'
 alias -g du='du -h'
 alias -g grep='grep --color=always'
