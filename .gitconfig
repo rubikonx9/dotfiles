@@ -1,20 +1,23 @@
 [user]
-	name = Tomasz Górecki
+    name = Tomasz Górecki
 [alias]
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     diffnames = diff --name-only
     diff2 = icdiff
 [core]
-	editor = vim
+    editor = vim
     pager = diff-so-fancy | less -R --tabs=1,5
 [pager]
     diff2 = less -R --tabs=1,5
 [merge]
-	conflictstyle = diff3
-	tool = vimdiff
+    conflictstyle = diff3
+    tool = vimdiff
 [mergetool]
-	prompt = false
+    prompt = false
 [credential]
-	helper = cache
+    helper = cache
 [push]
-	default = simple
+    default = simple
+[rerere]
+    enabled = true
+
