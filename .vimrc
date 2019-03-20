@@ -38,11 +38,4 @@ set tabstop=4
 " Always show airline
 set laststatus=2
 
-" Set color mode, needed for airline
-set t_Co=256
-
-" Enable powerline fonts for airline
-let g:airline_powerline_fonts=1
-
-" Set airline theme
-let g:airline_theme="powerlineish"
+colorscheme base16-eighties
