@@ -1,23 +1,56 @@
 [user]
     name = Tomasz Górecki
+    email = tomasz.gorecki@protonmail.com
+
 [alias]
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     diffnames = diff --name-only
     diff2 = icdiff
+
 [core]
-    editor = vim
-    pager = diff-so-fancy | less -R --tabs=1,5
+    editor = nvim
+    pager = diff-so-fancy | less -R --tabs=1,5 -F -X
+
+[credential]
+    helper = cache --timeout=604800
+
 [pager]
-    diff2 = less -R --tabs=1,5
+    diff2 = less -R --tabs=1,5 -F -X
+
 [merge]
     conflictstyle = diff3
     tool = vimdiff
+    ff = false
+
 [mergetool]
     prompt = false
-[credential]
-    helper = cache
+
+[pull]
+    ff = true
+    rebase = true
+
 [push]
     default = simple
+
 [rerere]
     enabled = true
 
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = true
+    pager = true
+
+[sendemail]
+    confirm = auto
+
+[diff]
+    tool = icdiff
+
+[difftool "icdiff"]
+    cmd = icdiff --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
+
+[include]
+    path = ~/.gitconfig-more
