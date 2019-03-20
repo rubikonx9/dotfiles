@@ -86,3 +86,14 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 - [Base-16 themes](https://github.com/0xdec/base16-rofi)
     + Can be patched with `base16-eighties.rasi.patch` for wider margins
 - `nerd-fonts-complete`
+
+## Sublime Text 3
+
+### What it does:
+
+- Visual settings, mostly
+
+### Dependencies:
+- `sublime-text`
+    + `Theme - Spacegray` package for theme & color scheme
+- `ttf-fira-code`
