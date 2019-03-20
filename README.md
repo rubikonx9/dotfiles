@@ -107,3 +107,14 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 ### Dependencies:
 - `sublime-merge`
 - `ttf-fira-code`
+
+## Dunst
+
+### What it does:
+- Sets color scheme: [Base16-eighties](https://github.com/khamer/base16-dunst)
+- Visual settings
+
+### Dependencies:
+- `dunst`
+- `nerd-fonts-complete`
+- `papirus-icon-theme`
