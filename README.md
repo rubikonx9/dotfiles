@@ -75,3 +75,14 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 ### Dependencies:
 - `compton`
 
+## Rofi
+
+### What it does:
+- Sets color scheme
+- Defines terminal
+
+### Dependencies:
+- `rofi`
+- [Base-16 themes](https://github.com/0xdec/base16-rofi)
+    + Can be patched with `base16-eighties.rasi.patch` for wider margins
+- `nerd-fonts-complete`

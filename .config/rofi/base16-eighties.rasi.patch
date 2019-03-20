@@ -1,0 +1,25 @@
+diff --git a/themes/base16-eighties.rasi b/themes/base16-eighties.rasi
+index ffbc4a6..ebf4383 100644
+--- a/themes/base16-eighties.rasi
++++ b/themes/base16-eighties.rasi
+@@ -39,7 +39,7 @@
+ window {
+     background-color: @background;
+     border:           1;
+-    padding:          5;
++    padding:          24;
+ }
+ mainbox {
+     border:           0;
+@@ -57,9 +57,9 @@ listview {
+     fixed-height:     0;
+     border:           2px dash 0px 0px ;
+     border-color:     @separatorcolor;
+-    spacing:          2px ;
++    spacing:          8px ;
+     scrollbar:        true;
+-    padding:          2px 0px 0px ;
++    padding:          8px 4px 4px 4px;
+ }
+ element {
+     border:           0;
