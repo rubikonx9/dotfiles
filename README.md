@@ -65,3 +65,13 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 - `termite`
 - `nerd-fonts-complete`
 
+## Compton
+
+### What it does:
+- Mostly default settings
+- Tweaked fading
+- Tweaked GLX settings to prevent screen tearing
+
+### Dependencies:
+- `compton`
+
