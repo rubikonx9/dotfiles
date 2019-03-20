@@ -45,3 +45,12 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 ### Dependencies:
 - `neovim`
 - [Base16-Vim](https://github.com/chriskempson/base16-vim) color scheme
+
+## XResources
+
+### What it does:
+- Defines color scheme: [Base16-eighties](https://github.com/chriskempson/base16-xresources)
+- Sets some screen settings
+
+### Dependencies:
+- `xorg`-something (?)
