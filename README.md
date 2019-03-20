@@ -97,3 +97,13 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 - `sublime-text`
     + `Theme - Spacegray` package for theme & color scheme
 - `ttf-fira-code`
+
+## Sublime Merge
+
+### What it does:
+
+- Visual settings, mostly
+
+### Dependencies:
+- `sublime-merge`
+- `ttf-fira-code`
