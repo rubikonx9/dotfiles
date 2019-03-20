@@ -54,3 +54,14 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 
 ### Dependencies:
 - `xorg`-something (?)
+
+## Termite
+
+### What it does:
+- Sets color scheme [Base16-eighties](https://github.com/khamer/base16-termite)
+- Sets fonts, cursor style, etc.
+
+### Dependencies:
+- `termite`
+- `nerd-fonts-complete`
+
