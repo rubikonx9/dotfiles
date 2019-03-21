@@ -119,6 +119,29 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 - `nerd-fonts-complete`
 - `papirus-icon-theme`
 
+## i3
+
+### What it does:
+- Visual settings
+- Sets key bindings
+
+### Dependencies:
+- `i3-gaps`
+- `nerd-fonts-complete`
+- [`pa-vol`](https://github.com/rubikonx9/pa-vol) for volume control
+- `light` for brightness control
+- `termite` as terminal emulator
+- `arandr` for display management
+- `rofi` for many things
+- `polybar` as bar
+- `compton` as compositor
+- `dunst` for notifications
+- `nm-applet` for network management icon in tray
+- `nitrogen` for setting wallpapers
+- `xautolock` for screen locking
+- `i3lock` for screen locking
+    + I'm using `i3lock-fancier-git` from `AUR`
+
 ## Polybar
 
 ### What it does:
