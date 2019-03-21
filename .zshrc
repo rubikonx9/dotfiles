@@ -2,18 +2,27 @@
 
 export GITHUB_DIR="${HOME}/github/"
 
+if [ -d "${HOME}/.bin" ]; then
+    export CUSTOM_BIN_DIR="${HOME}/.bin"
+fi
+
+export PATH="${PATH}:${CUSTOM_BIN_DIR}"
+
+# Path to your oh-my-zsh installation
+export ZSH=${HOME}/.oh-my-zsh
+
 # Theme settings - ${ZSH}/custom/themes/bullet-train.zsh-theme
 export ZSH_THEME="bullet-train"
 
 export BULLETTRAIN_STATUS_EXIT_SHOW=true
 export BULLETTRAIN_PROMPT_ORDER=(
-  time
-  status
-  context
-  dir
-  screen
-  git
-  cmd_exec_time
+    time
+    status
+    context
+    dir
+    screen
+    git
+    cmd_exec_time
 )
 
 # Base16 color scheme
@@ -22,15 +31,12 @@ BASE16_DIR="${GITHUB_DIR}/base16-shell/"
 
 # zsh plugins
 plugins=(
-  npm
-  sudo
-  colored-man-pages
-  colorize
-  globalias
+    npm
+    sudo
+    colored-man-pages
+    colorize
+    globalias
 )
-
-# Path to your oh-my-zsh installation
-export ZSH=${HOME}/.oh-my-zsh
 
 # Startup
 source ${ZSH}/oh-my-zsh.sh
