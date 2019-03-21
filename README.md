@@ -118,3 +118,16 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 - `dunst`
 - `nerd-fonts-complete`
 - `papirus-icon-theme`
+
+## Polybar
+
+### What it does:
+- Defines bars & modules
+
+### Dependencies:
+- `polybar`
+- `nerd-fonts-complete`
+- `ttf-font-awesome`
+- Relies on color scheme defined in `xrdb`, see `Xresources` above
+- `dunst`
+
