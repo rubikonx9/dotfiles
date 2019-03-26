@@ -141,7 +141,7 @@ bindsym $mod+Ctrl+b exec $quiet polybar-launch
 bindsym $mod+Ctrl+m exec $quiet setup-monitors
 
 # Exit i3 (logs you out of your X session)
-bindsym $mod+Ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Ctrl+e exec $quiet rofi-exit-i3
 
 ## Workspaces
 
@@ -212,17 +212,8 @@ assign [class="Termite"]                   $ws3term
 
 ## Startup
 
-exec $quiet dunst &
 exec $quiet compton -b
+exec $quiet dunst &
 exec $quiet nm-applet &
 
-# TODO doesn't really work
-# exec $quiet bash -c 'x=$(xrandr --listmonitors); if [[ "$x" == *"DP3"* && "$x" == *"DP2"* && "$x" == *"eDP1"* ]]; then ~/.screenlayout/3-screen-office.sh; fi'
-
-# TODO doesn't really work
-# exec $quiet nitrogen --restore &
-
-# TODO doesn't really work
-# exec $quiet 'xautolock -locker "i3lock --nofork" -time 3 -killtime 10 -killer "xset dpms force off"'
-
-exec_always $quiet polybar_launch
+exec_always $quiet polybar-launch
