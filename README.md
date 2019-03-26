@@ -137,10 +137,8 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 - `compton` as compositor
 - `dunst` for notifications
 - `nm-applet` for network management icon in tray
-- `nitrogen` for setting wallpapers
-- `xautolock` for screen locking
-- `i3lock` for screen locking
-    + I'm using `i3lock-fancier-git` from `AUR`
+- `xautolock` for automated screen locking
+- `i3lock-color` with [`i3lock-multimonitor`](https://github.com/ShikherVerma/i3lock-multimonitor) for screen locking
 
 ## Polybar
 
@@ -154,3 +152,14 @@ Well, I'm using `neovim`, actually, but it should be mostly (?) compatible.
 - Relies on color scheme defined in `xrdb`, see `Xresources` above
 - `dunst`
 
+## .xinitrc
+
+### What it does:
+- Loads `Xresources`
+- Sets the screens up & sets wallpaper
+- Starts up `i3`
+
+### Dependencies:
+- `nitrogen` for setting wallpapers
+- `xautolock` for automated screen locking
+    + I'm using a custom script (`i3lock-multimonitor-wrapper`) to actually start the locker
