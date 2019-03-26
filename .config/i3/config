@@ -137,6 +137,9 @@ bindsym $mod+Ctrl+r restart
 # Restart polybar
 bindsym $mod+Ctrl+b exec $quiet polybar-launch
 
+# Configure displays, it's not automated
+bindsym $mod+Ctrl+m exec $quiet setup-monitors
+
 # Exit i3 (logs you out of your X session)
 bindsym $mod+Ctrl+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
