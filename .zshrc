@@ -2,8 +2,8 @@
 
 export GITHUB_DIR="${HOME}/github/"
 
-if [ -d "${HOME}/.bin" ]; then
-    export CUSTOM_BIN_DIR="${HOME}/.bin"
+if [ -d "${HOME}/.local/bin" ]; then
+    export CUSTOM_BIN_DIR="${HOME}/.local/bin"
 fi
 
 export PATH="${PATH}:${CUSTOM_BIN_DIR}"
