@@ -32,7 +32,17 @@
 		"msg",
 		"dir",
 		"dirs",
-		"thirdparty"
+		"thirdparty",
+		"tooltip",
+		"focusin",
+		"mouseover",
+		"fullscreen",
+		"config",
+		"rofi",
+		"i3",
+		"https",
+		"org",
+		"dt"
 	],
 	"auto_complete": false,
 	"auto_complete_triggers":
@@ -104,6 +114,7 @@
 	"scroll_speed": 0.75,
 	"show_encoding": true,
 	"show_line_endings": true,
+	"spell_check": true,
 	"tab_size": 4,
 	"theme": "Spacegray Eighties.sublime-theme",
 	"translate_tabs_to_spaces": true,
