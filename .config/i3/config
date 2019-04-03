@@ -81,8 +81,9 @@ bindsym $super+p exec $quiet arandr
 # bindsym $mod+k exec $quiet "~/.config/rofi/pkcli.pl"
 
 # Power management
-bindsym $super+l      exec $quiet "xautolock -locknow"
-bindsym $super+Ctrl+l exec $quiet rofi-power
+bindsym $super+l         exec $quiet "xautolock -locknow"
+bindsym $super+Ctrl+l    exec $quiet rofi-power
+bindsym $alt+Ctrl+Delete exec $quiet rofi-power
 
 # Window switcher
 bindsym $mod+Tab exec $quiet "rofi -modi window,windowcd -show window"
@@ -128,21 +129,6 @@ bindsym $mod+space focus mode_toggle
 
 # Focus the parent container
 bindsym $mod+a focus parent
-
-# Reload the configuration file
-bindsym $mod+Ctrl+c reload
-
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Ctrl+r restart
-
-# Restart polybar
-bindsym $mod+Ctrl+b exec $quiet polybar-launch
-
-# Configure displays, it's not automated
-bindsym $mod+Ctrl+m exec $quiet setup-monitors
-
-# Exit i3 (logs you out of your X session)
-bindsym $mod+Ctrl+e exec $quiet rofi-exit-i3
 
 ## Workspaces
 
