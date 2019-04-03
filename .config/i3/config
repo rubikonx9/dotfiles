@@ -203,7 +203,7 @@ bindsym $mod+r mode "resize"
 ## Applications' assignment
 
 assign [class="Firefox"]                   $ws1web
-assign [class="Firefox Developer Edition"] $ws4mail
+assign [class="Firefox Developer Edition"] $ws1web
 assign [class="KeeWeb"]                    $ws6tools
 assign [class="Mattermost"]                $ws5im
 assign [class="Pidgin"]                    $ws5im
