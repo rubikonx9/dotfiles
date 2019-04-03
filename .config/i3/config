@@ -81,7 +81,8 @@ bindsym $super+p exec $quiet arandr
 # bindsym $mod+k exec $quiet "~/.config/rofi/pkcli.pl"
 
 # Power management
-bindsym $super+l exec $quiet rofi-power
+bindsym $super+l      exec $quiet "xautolock -locknow"
+bindsym $super+Ctrl+l exec $quiet rofi-power
 
 # Window switcher
 bindsym $mod+Tab exec $quiet "rofi -modi window,windowcd -show window"
