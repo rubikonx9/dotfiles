@@ -140,6 +140,12 @@ function make_symlinks() {
     ln --symbolic --force "${GITHUB_DIR}/dotfiles/.local/bin/setup-monitors.sh" \
                           "${HOME}/.local/bin/setup-monitors"
 
+    ln --symbolic --force "${GITHUB_DIR}/dotfiles/.local/bin/xautolock-start.sh" \
+                          "${HOME}/.local/bin/xautolock-start"
+
+    ln --symbolic --force "${GITHUB_DIR}/dotfiles/.local/bin/xautolock-stop.sh" \
+                          "${HOME}/.local/bin/xautolock-stop"
+
     ln --symbolic --force "${GITHUB_DIR}/dotfiles/.gitconfig" \
                           "${HOME}/.gitconfig"
 

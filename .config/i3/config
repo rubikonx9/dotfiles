@@ -81,7 +81,7 @@ bindsym $super+p exec $quiet arandr
 # bindsym $mod+k exec $quiet "~/.config/rofi/pkcli.pl"
 
 # Power management
-bindsym $super+l         exec $quiet "xautolock -locknow"
+bindsym $super+l         exec $quiet "xautolock -locknow || dunstify 'Locker not running'"
 bindsym $super+Ctrl+l    exec $quiet rofi-power
 bindsym $alt+Ctrl+Delete exec $quiet rofi-power
 
