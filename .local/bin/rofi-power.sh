@@ -54,7 +54,7 @@ case "${ACTION}" in
         polybar-launch
         ;;
     $LABEL_SUSPEND)
-        xautolock -locknow && systemctl suspend
+        xautolock -locknow; systemctl suspend
         ;;
     $LABEL_REBOOT)
         systemctl reboot
