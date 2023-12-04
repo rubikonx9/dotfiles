@@ -1,0 +1,9 @@
+- defaults:
+    link:
+        relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.zshrc:       .zshrc
+    ~/.config/nvim: .config/nvim
