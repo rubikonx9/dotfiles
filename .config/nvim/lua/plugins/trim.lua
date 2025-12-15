@@ -1,3 +1,0 @@
-return {
-    "cappyzawa/trim.nvim"
-}

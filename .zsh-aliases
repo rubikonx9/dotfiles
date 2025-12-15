@@ -1,0 +1,11 @@
+#!/usr/bin/zsh
+
+alias cal='cal -m'
+
+alias xff='find . -type f | xargs grep 2>/dev/null --color=auto -E -e'
+
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+
+bindkey -s '^F' 'fzf^J'
+bindkey    '^H' backward-kill-word

@@ -1,6 +1,0 @@
-rofi.terminal:             termite
-rofi.ssh-client:           ssh
-rofi.ssh-command:          {terminal} -e "{ssh-client} {host}"
-rofi.show-icons:           true
-rofi.theme:                base16-eighties
-rofi.font:                 RobotoMono Nerd Font 12

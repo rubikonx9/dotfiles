@@ -1,131 +1,150 @@
-#!/usr/bin/zsh
+#!/usr/sbin/zsh
 
-export GITHUB_DIR="${HOME}/github/"
+source "${HOME}"/.environment
+source "${HOME}"/.zsh-theme
 
-if [ -d "${HOME}/.local/bin" ]; then
-    export CUSTOM_BIN_DIR="${HOME}/.local/bin"
+export plugins=(
+    sudo
+)
+
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
 fi
 
-export PATH="${PATH}:${CUSTOM_BIN_DIR}"
+source $ZSH/oh-my-zsh.sh
 
-# Path to your oh-my-zsh installation
-export ZSH=${HOME}/.oh-my-zsh
+if [[ ! -L '/run/user/1000/wayland-0' ]]; then
+	ln -s /mnt/wslg/runtime-dir/wayland-0* /run/user/1000/
+fi
 
-# Theme settings - ${ZSH}/custom/themes/bullet-train.zsh-theme
-export ZSH_THEME="bullet-train"
+source "${HOME}"/.zsh-aliases
 
-export BULLETTRAIN_STATUS_EXIT_SHOW=true
-export BULLETTRAIN_PROMPT_ORDER=(
-    time
-    status
-    context
-    dir
-    screen
-    git
-    cmd_exec_time
-)
+# FZF
+export FZF_DEFAULT_COMMAND='find . -type f -not -path "*/.git/*" -not -path "*/node_modules/*"'
+export FZF_CTRL_R_OPTS="\
+    --header='' \
+"
+export FZF_DEFAULT_OPTS="\
+    --multi \
+    --border=sharp \
+    --height='40%' \
+    --info=inline \
+    --layout=reverse \
+    --padding=1 \
+    --preview-window border-sharp \
+    --bind='ctrl-e:execute-silent(vim {})'
+    --header='CTRL-E to edit' \
+"
 
-# Base16 color scheme
-BASE16_DIR="${GITHUB_DIR}/base16-shell/"
-[ -n "${PS1}" ] && [ -s "${BASE16_DIR}/profile_helper.sh" ] && eval "$("${BASE16_DIR}/profile_helper.sh")"
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 
-# zsh plugins
-plugins=(
-    npm
-    sudo
-    colored-man-pages
-    colorize
-    globalias
-)
 
-# Startup
-source ${ZSH}/oh-my-zsh.sh
-source ${ZSH}/custom/manjaro-settings.zsh
+function install-rpm {
+    rpm_pattern=$1
+    host=$2
+    service_pattern=$3
 
-# Plugins
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    if [[ "${rpm_pattern}" == "" ]]; then
+        echo "No RPM selected"
+        return
+    fi
 
-# Other settings
-export HISTSIZE=1000000
-export SAVEHIST=1000000
+    if [[ "${host}" == "" ]]; then
+        echo "No host selected"
+        return
+    fi
 
-# Aliases
+    services=(sem-gui sem-api nginx)
 
-alias -g ls='ls --color=auto'
-alias -g ll='ls -lah'
-alias -g df='df -h'
-alias -g du='du -h'
-alias -g grep='grep --color=auto'
-alias -g fname='find -name'
-alias -g less='less --tabs=1,5'
+    for rpm_file in $(ls -1 "${SMAWL}"/rpm/*.rpm); do
+        if [[ "${rpm_file}" == *"${rpm_pattern}"* ]]; then
+            rpm_file_basename=$(basename ${rpm_file})
+            echo "Installing ${rpm_file_basename} on ${host}..."
 
-alias -g ð='git'
-alias -g ðs='ð status'
-alias -g ðss='ðs -s'
-alias -g ðdd='ð diff'
-alias -g ðd='ð diff2'
-alias -g ðdn='ð diffnames'
-alias -g ða='ð add'
-alias -g ðc='ð commit'
-alias -g ðcc='ðc -m'
-alias -g ðb='ð branch'
-alias -g ð↑='ð push'
-alias -g ð↑↑='ð↑ -u origin $(git branch | grep -e "^*" | cut -d" " -f 2)'
-alias -g ð↓='ð pull'
-alias -g ðx='ð checkout'
-alias -g ðr='ð reset'
-alias -g ðrr='ð reset --hard'
+            echo "-> Copying..."
+            scp "${rpm_file}" "root@${host}":/tmp/ >/dev/null 2>&1
+            if [[ "$?" != "0" ]]; then echo "✘ Could not copy file"; return; fi
 
-alias -g ≈='| grep'
-alias -g ≠='| grep -v'
-alias -g ≈≈='find . -type f | xargs grep 2>/dev/null -e'
+            echo "-> Installing..."
+            ssh "root@${host}" -C "rpm -Uhv --force /tmp/${rpm_file_basename}" >/dev/null 2>&1
+            if [[ "$?" != "0" ]]; then echo "✘ Could not install the rpm"; return; fi
+        fi
+    done
 
-alias -g :1='| cut -d":" -f1'
-alias -g :2='| cut -d":" -f2'
-alias -g :3='| cut -d":" -f3'
-alias -g :4='| cut -d":" -f4'
-alias -g :5='| cut -d":" -f5'
-alias -g :6='| cut -d":" -f6'
-alias -g :7='| cut -d":" -f7'
-alias -g :8='| cut -d":" -f8'
-alias -g :9='| cut -d":" -f9'
+    echo "-> Restarting service(s)..."
+    for service in "${services[@]}"; do
+        if [[ "${service_pattern}" == "" || "${service}" == *"${service_pattern}"* ]]; then
+            echo "--> ${service}..."
+            ssh "root@${host}" -C "mainframectl restart ${service}" >/dev/null 2>&1
+            if [[ "$?" != "0" ]]; then echo "✘ Could not restart service ${service}"; return; fi
+        fi
+    done
 
-# Functions
-SSH_ENV="${HOME}/.ssh/environment"
-
-function start_ssh_agent {
-    echo "Initialising new SSH agent..."
-
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-
-    echo "succeeded"
-
-    chmod 600 "${SSH_ENV}"
-
-    source "${SSH_ENV}" > /dev/null
-
-    /usr/bin/ssh-add
+    echo "-> Cleanup..."
+    ssh "root@${host}" -C "rm /tmp/${rpm_file_basename}" >/dev/null 2>&1
+    if [[ "$?" != "0" ]]; then echo "✘ Could not clean up"; return; fi
 }
 
-function start_ssh_agent_if_needed {
-    if [ -f "${SSH_ENV}" ]; then
-        source "${SSH_ENV}" > /dev/null
+[ -f /home/tsh/.config/cani/completions/_cani.zsh ] && source /home/tsh/.config/cani/completions/_cani.zsh
 
-        ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-            start_ssh_agent
-        }
+export CHPWD_ACTIVE=0
+
+chpwd() {
+    if [[ "${CHPWD_ACTIVE}" -eq "1" ]]; then
+        return
+    fi
+
+    export CHPWD_ACTIVE=1
+
+    CURRENT_DIR=$(pwd)
+    ORIG_OLDPWD=${OLDPWD}
+
+    if [[ "${CURRENT_DIR}" == *se/* ]]; then
+        while [[ true ]]; do
+            TMP_PWD=$(pwd)
+
+            if [[ "${TMP_PWD}" == "/" ]]; then
+                break
+            fi
+
+            if [[ -f ./profile ]]; then
+                source ./profile
+                break
+            fi
+
+            builtin cd ..
+        done
+
+        builtin cd "${CURRENT_DIR}"
+    fi
+
+    export OLDPWD=${ORIG_OLDPWD}
+    export CHPWD_ACTIVE=0
+}
+
+start_auto_firewall() {
+    if pgrep -f "run-periodically.sh" >/dev/null 2>&1; then
+        # OK!
     else
-        start_ssh_agent
+        ~/auto-firewall/run-periodically.sh >> ~/auto-firewall/log 2>&1 &
+        disown
     fi
 }
 
-# Init
+start_auto_firewall
 
-start_ssh_agent_if_needed
 
-# Per-machine settings
+_fzf_complete_pass() {
+    _fzf_complete --multi --reverse --prompt="pass> " -- "$@" < <(
+        local prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store}";
 
-if [ -f "${HOME}/.zshrc-more" ]; then
-    source "${HOME}/.zshrc-more"
-fi
+        find -L "$prefix" -type f -not -name ".gitattributes" -not -name ".gpg-id" -not -path "$prefix/.git/*" 2>/dev/null | sed -E "s|^${prefix}/||g" | sed -E 's/\.gpg$//g'
+  )
+}
+
+export NODE_PATH=/usr/lib/node_modules/
+export OPENAI_API_KEY=$(pass Fujitsu/Dev/AI-Api-Key | head -n1)
+
+source /usr/share/nvm/init-nvm.sh

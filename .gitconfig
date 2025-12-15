@@ -3,24 +3,32 @@
     email = tomasz.gorecki@protonmail.com
 
 [alias]
+    confirm = auto
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-    diffnames = diff --name-only
-    diff2 = icdiff
 
 [core]
     editor = nvim
-    pager = diff-so-fancy | less -R --tabs=1,5 -F -X
+    pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	side-by-side = true
+	navigate = false
+	light = false
+	hyperlinks = true
+	true-color = always
+	features = unobtrusive-line-numbers decorations
 
 [credential]
-    helper = cache --timeout=604800
+    helper = cache --timeout=3600000
 
 [pager]
     diff2 = less -R --tabs=1,5 -F -X
 
 [merge]
     conflictstyle = diff3
-    tool = vimdiff
-    ff = false
 
 [mergetool]
     prompt = false
@@ -29,8 +37,15 @@
     ff = true
     rebase = true
 
+[rebase]
+	autoSquash = true
+	autoStash = true
+
 [push]
-    default = simple
+    default = current
+
+[advice]
+	skippedCherryPicks = false
 
 [rerere]
     enabled = true
@@ -47,10 +62,4 @@
     confirm = auto
 
 [diff]
-    tool = icdiff
-
-[difftool "icdiff"]
-    cmd = icdiff --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
-
-[include]
-    path = ~/.gitconfig-more
+    colorMoved = default
